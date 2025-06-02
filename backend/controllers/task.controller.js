@@ -26,7 +26,7 @@ const createTask = asyncHandler(async(req,res) =>{
 
     return res
     .status(200)
-    .json(ApiResponse(200,task,"Task created successfully"))
+    .json(new ApiResponse(200,task,"Task created successfully"))
 })
 
 
@@ -72,7 +72,7 @@ const updateTask = asyncHandler(async(req,res)=>{
     }
 
     const task = await Task.findById(taskId)
-
+    
     if(!task){
         throw new ApiError(404,"Task not found")
     }
@@ -98,9 +98,8 @@ const updateTask = asyncHandler(async(req,res)=>{
         update.dueDate = dueDate
     }
 
-
     const updatedTask = await Task.findByIdAndUpdate(
-        taskId._id,
+        task._id,
         {
             $set:update
         },
