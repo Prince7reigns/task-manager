@@ -19,6 +19,9 @@ const taskSchema= new Schema({
         type:Boolean,
         default:false
     },
+    dueDate:{
+        type:Date
+    },
     owner:{
         type: Schema.Types.ObjectId,
         ref: 'User',

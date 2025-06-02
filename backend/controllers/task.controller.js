@@ -6,16 +6,17 @@ import mongoose,{isValidObjectId} from "mongoose";
 
 
 const createTask = asyncHandler(async(req,res) =>{
-    const {title,description,periorty} = req.body;
+    const {title,description,periorty,dueDate} = req.body;
 
-    if (!title || !description) {
-        throw new ApiError(400, "title  is required");
+    if (!title && !description) {
+        throw new ApiError(400, "title and description  are required");
     }
 
     const task = await Task.create({
         title,
         description,
         periorty,
+        dueDate,
         owner:req.user?._id
     })
 
@@ -63,7 +64,7 @@ const getTeskById = asyncHandler(async(req,res)=>{
 })
 
 const updateTask = asyncHandler(async(req,res)=>{
-    const {title,description,periorty} = req.body
+    const {title,description,periorty,dueDate} = req.body
     const taskId = req.params.id;
 
     if(!isValidObjectId(taskId)){
@@ -91,6 +92,10 @@ const updateTask = asyncHandler(async(req,res)=>{
 
     if(periorty){
         update.periorty=periorty
+    }
+
+    if(dueDate){
+        update.dueDate = dueDate
     }
 
 
