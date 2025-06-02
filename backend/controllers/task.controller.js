@@ -39,7 +39,7 @@ const getTasks = asyncHandler(async(req,res)=>{
 
     return res
     .status(200)
-    .json(ApiResponse(200,tasks,"Tasks retrieved successfully"))
+    .json(new ApiResponse(200,tasks,"Tasks retrieved successfully"))
 })
 
 const getTeskById = asyncHandler(async(req,res)=>{
@@ -60,7 +60,7 @@ const getTeskById = asyncHandler(async(req,res)=>{
 
     return res
     .status(200)
-    .json(ApiResponse(200,task,"Task retrieved successfully"))
+    .json(new ApiResponse(200,task,"Task retrieved successfully"))
 })
 
 const updateTask = asyncHandler(async(req,res)=>{
@@ -111,7 +111,7 @@ const updateTask = asyncHandler(async(req,res)=>{
 
     return res
     .status(200)
-    .json(ApiResponse(200,updatedTask,"Task updated successfully"))
+    .json(new ApiResponse(200,updatedTask,"Task updated successfully"))
 })
 
 const deleteTask = asyncHandler(async(req,res)=>{
@@ -135,7 +135,7 @@ const deleteTask = asyncHandler(async(req,res)=>{
 
     return res
     .status(200)
-    .json(ApiResponse(200,{} , "Task deleted successfully"))
+    .json(new ApiResponse(200,{} , "Task deleted successfully"))
 
 })
 
