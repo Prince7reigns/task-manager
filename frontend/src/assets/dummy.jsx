@@ -133,7 +133,8 @@ export const TIP_CARD = {
 
 // SIGNUP 
 export const FIELDS = [
-    { name: "name", type: "text", placeholder: "Full Name", icon: User },
+    { name: "fullName", type: "text", placeholder: "Full Name", icon: User },
+    { name: "username", type: "text", placeholder: "username", icon: User },
     { name: "email", type: "email", placeholder: "Email", icon: Mail },
     { name: "password", type: "password", placeholder: "Password", icon: Lock },
 ]
@@ -286,7 +287,7 @@ export const TI_CLASSES = {
     createdRow: "flex items-center gap-1.5 text-xs text-gray-400 whitespace-nowrap",
 }
 // APP.JSX
-const user = {
-      avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name || 'User')}&background=random`
-    };
+// const user = {
+//       avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name || 'User')}&background=random`
+//     };
 
