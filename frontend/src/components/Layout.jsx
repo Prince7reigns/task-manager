@@ -9,18 +9,20 @@ const Layout = ({user , onLogout  }) => {
     const [tasks,setTasks] = useState([])
     const[loading,setLoading]=useState(true)
     const[error,setErorr]=useState(null)
+    const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken') || '')
 
     const fetchTasks=useCallback(async()=>{
         setErorr(null)
         setLoading(true)
         try {
-            const refreshToken = localStorage.getItem('refreshToken')
-            if(!refreshToken){
+            const accessToken = localStorage.getItem('accessToken')
+            
+            if(!accessToken){
                 throw new Error("no auth found")
             }
-            const {data}=await axios.get("http://localhost:4000/api/tasks/gp", {
+            const {data}=await axios.get("http://localhost:4000/api/v1/tasks/gp", {
                 headers:{
-                    Authorization: `${refreshToken}`
+                    Authorization: `${accessToken}`
                 }
             })
 
@@ -65,8 +67,9 @@ const Layout = ({user , onLogout  }) => {
     },[tasks])
 
 
-    const StatCard = ({title,value,icon}) =>{
-        <div className='p-2 sm:p-3 rounded-xl bg-white shadow-sm border border-purple-100 hover:shadow-md transition-all duration-300 hover:border-purple-100 group'>
+    const StatCard = ({title,value,icon}) =>
+        (
+            <div className='p-2 sm:p-3 rounded-xl bg-white shadow-sm border border-purple-100 hover:shadow-md transition-all duration-300 hover:border-purple-100 group'>
             <div className='flex items-center gap-2 '>
                <div className='p-1.5 rounded-lg bg-gradient-to-br from-fuchsia-500/10 to-purple-500/10 group-hover:from-fuchsia-500/20 group-hover:to-purple-500/20'>
                   {icon}
@@ -81,7 +84,8 @@ const Layout = ({user , onLogout  }) => {
                </div>
             </div>
         </div>
-    }
+        )
+    
 
 
 
@@ -114,17 +118,17 @@ const Layout = ({user , onLogout  }) => {
       <div className='ml-0 xl:ml-64 md:ml-16 p-3 sm:p-4 md:p-4 transition-all duration-300'>
          <div className='grid grid-cols-1 xl:grid-cols-3 gap-4 sm:gap-6'>
              <div className='xl:col-span-2 space-y-3 sm:space-y-4'>
-                <Outlet context={{tasks,refreshTasks,fetchTasks}}/>
+                <Outlet context={{tasks,accessToken,fetchTasks}}/>
              </div>
 
              <div className='xl:col-span-1 space-y-4 sm:space-y-6'>
                  <div className='bg-white rounded-xl p-4 sm:p-5 shadow-sm border border-purple-100'>
-                    <div className='text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 flex items-center gap-2'>
+                    <div className=' text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 flex flex-col items-center gap-2'>
                       <h3 className='text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 flex items-center gap-2'>
                           <TrendingUp className='w-4 h-4 sm:w-5 sm:h-5 text-purple-500'/>
                           Task Statistics
                       </h3>
-
+                            
                       <div className='grid grid-cols-2 gap-4 sm:gap-4 mb-4 sm:mb-6'>
                             <StatCard title='total Tasks' value={stats.totalCount} icon={<Circle className='w-3.5 h-3.5 sm:w-4 text-purple-500' />} />
                              <StatCard title='Completed' value={stats.completedTasks} icon={<Circle className='w-3.5 h-3.5 sm:w-4 text-green-500' />} />
