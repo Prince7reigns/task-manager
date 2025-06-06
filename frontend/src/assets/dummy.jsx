@@ -1,3 +1,4 @@
+
 import {
     User, Mail, Home,
     ListChecks,
@@ -135,6 +136,11 @@ export const TIP_CARD = {
 export const FIELDS = [
     { name: "fullName", type: "text", placeholder: "Full Name", icon: User },
     { name: "username", type: "text", placeholder: "username", icon: User },
+    { name: "email", type: "email", placeholder: "Email", icon: Mail },
+    { name: "password", type: "password", placeholder: "Password", icon: Lock },
+]
+
+export const FIELD = [
     { name: "email", type: "email", placeholder: "Email", icon: Mail },
     { name: "password", type: "password", placeholder: "Password", icon: Lock },
 ]
