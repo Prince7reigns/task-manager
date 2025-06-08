@@ -4,6 +4,8 @@ import { Outlet,Route,Routes, useNavigate } from 'react-router-dom'
 import Layout from './components/Layout'
 import Login from './components/Login'
 import SignUp from './components/SignUp'
+import { Navigate } from 'react-router-dom'
+import Dashboard from './components/Dashboard'
 
 function App() {
 
@@ -40,11 +42,11 @@ function App() {
     navigate('/login', {replace:true})
   }
 
-  const ProtectedLayout = ()=>{
+  const ProtectedLayout = ()=>(
     <Layout user={currentUser} onLogout={handelLogout}>
       <Outlet/>
     </Layout>
-  }
+  )
 
   return (
     <Routes>
@@ -57,7 +59,12 @@ function App() {
        <SignUp onSubmit={handleAuthSubmit} onSwitchMode={()=>navigate('/login')}/>
        </div>}/>
 
-      <Route path='/' element={<Layout/>}/>
+       <Route element={currentUser ? <ProtectedLayout/> : <Navigate to='/login' replace/>}>
+        <Route path='/' element={<Dashboard/>}/>
+       </Route>
+
+       <Route path='*' element={<Navigate to={currentUser ? "/" : "/login"} replace />}/>
+      
     </Routes>
   )
 }
