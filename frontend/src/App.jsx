@@ -6,6 +6,9 @@ import Login from './components/Login'
 import SignUp from './components/SignUp'
 import { Navigate } from 'react-router-dom'
 import Dashboard from './components/Dashboard'
+import Panding from './pages/Panding'
+import CompletePage from './pages/CompletePage'
+import Profile from './pages/Profile'
 
 function App() {
 
@@ -61,6 +64,9 @@ function App() {
 
        <Route element={currentUser ? <ProtectedLayout/> : <Navigate to='/login' replace/>}>
         <Route path='/' element={<Dashboard/>}/>
+        <Route  path='panding' element={<Panding/>}/>
+        <Route path='complete' element={<CompletePage/>}/>
+        <Route path='profile' element={<Profile user={currentUser} onLogout={handelLogout}/>}/>
        </Route>
 
        <Route path='*' element={<Navigate to={currentUser ? "/" : "/login"} replace />}/>
