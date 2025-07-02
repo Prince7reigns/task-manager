@@ -101,7 +101,7 @@ const Login = ({onSubmit,onSwitchMode}) => {
            
                if(data.success){
               onSubmit?.({
-                refreshToken,
+                accessToken,
                 userId,
                 ...data.user
             })
