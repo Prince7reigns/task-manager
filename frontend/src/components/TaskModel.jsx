@@ -3,7 +3,7 @@ import { baseControlClasses, DEFAULT_TASK, priorityStyles } from '../assets/dumm
 import { AlignLeft, Calendar, CheckCircle, Flag, PlusCircle, Save ,X} from 'lucide-react'
 
 
-const API_URL = 'http://localhost:4000'
+const API_URL = 'http://localhost:4000/api/v1/tasks'
 
 const TaskModel = ({isOpen, onClose, taskToEdit,onSave,onLogout}) => {
 
@@ -33,7 +33,7 @@ const TaskModel = ({isOpen, onClose, taskToEdit,onSave,onLogout}) => {
         
     },[isOpen,taskToEdit])
 
-    const handleChange = useCallback((e) =>{
+    const handleChange =  ((e) =>{
       const {name,value} = e.target
       setTaskData(prev=> ({...prev,[name]:value}))
     },[])
@@ -135,7 +135,7 @@ const TaskModel = ({isOpen, onClose, taskToEdit,onSave,onLogout}) => {
                  <label className='flex items-center gap-1 text-sm font-medium text-purple-100 mb-1'>
                     <Calendar  className='h-4 w-4 text-purple-500'/> Due Date
                   </label>
-                  <input type="date" name='dueDate' required min={today}  value={taskData.dueDate} onClick={handleChange} className={baseControlClasses}/>
+                  <input type="date" name='dueDate' required min={today}  value={taskData.dueDate} onChange={handleChange} className={baseControlClasses}/>
                </div>
             </div>
 
