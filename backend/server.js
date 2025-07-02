@@ -14,14 +14,6 @@ app.use(cookieParser())
 
 connectDB()
 
-app.get('/', (req, res) => {
-  res.send('Hello World! API working')
-})
-
-app.listen(port, ()=>{
-    console.log("server has strted on local host ");
-    
-})
 
 import userRouter from "./routes/user.routes.js"
 import taskRouter from "./routes/task.routes.js"
