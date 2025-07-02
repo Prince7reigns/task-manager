@@ -1,5 +1,5 @@
 import React ,{useEffect, useState} from 'react'
-import { menuItems, PRODUCTIVITY_CARD, SIDEBAR_CLASSES, TIP_CARD } from '../assets/dummy'
+import { menuItems, PRODUCTIVITY_CARD, SIDEBAR_CLASSES, TIP_CARD,LINK_CLASSES } from '../assets/dummy'
 import { Lightbulb, Menu, Sparkle, X } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ const Sidebar = ({user,tasks}) => {
 
     const renderMenuItems = (isMobile = false) => (
       <ul className='space-y-2'>
-          {menuItems.map(({yext,path,icon}) => (
+          {menuItems.map(({text,path,icon}) => (
             <li key={text}>
               <NavLink to={path} className={({ isActive }) =>[
                 LINK_CLASSES.base,
@@ -90,7 +90,7 @@ const Sidebar = ({user,tasks}) => {
               </div>
           </div>
        </div>
-       {/8* Mobile Sidebar */}
+       {/* Mobile Sidebar */}
        {!mobileOpen && (
         <button className={SIDEBAR_CLASSES.mobileButton} onClick={() => setMobileOpen(true)}>
           <Menu className='w-5 h-5' />
