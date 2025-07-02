@@ -1,6 +1,6 @@
 import React,{useCallback, useMemo, useState} from 'react'
 import { ADD_BUTTON, HEADER, ICON_WRAPPER, STAT_CARD, STATS_GRID, VALUE_CLASS, WRAPPER,STATS, LABEL_CLASS, FILTER_WRAPPER, FILTER_LABELS, SELECT_CLASSES, TABS_WRAPPER, FILTER_OPTIONS, TAB_BASE, TAB_ACTIVE, TAB_INACTIVE, EMPTY_STATE } from '../assets/dummy'
-import { CalendarIcon, Filter, HomeIcon,Plus ,TaskItem} from 'lucide-react'
+import { CalendarIcon, Filter, HomeIcon,Plus } from 'lucide-react'
 import { useOutletContext } from 'react-router-dom'
 import TaskItem from '../components/TaskItem'
 import axios from 'axios'
@@ -10,7 +10,7 @@ const API_URL = 'http://localhost:4000'
 
 const Dashboard = () => {
 
-    const {tasks, setTasks} = useOutletContext() 
+    const {tasks, refreshTasks} = useOutletContext() 
     const [showModel,setShowModel] = useState(false)
     const [selectedTask, setSelectedTask] = useState(null)
     const [filter, setFilter] = useState('all')
@@ -98,9 +98,11 @@ const Dashboard = () => {
                     </h2>
                </div>
                <select value={filter} onChange={(e)=> setFilter(e.target.value)} className={SELECT_CLASSES}>
-                {FILTER_LABELS.map(opt => <option key={opt} value={opt}>
-                   {opt.charAt(0).toUpperCase() + opt.slice(1)}
-                </option>)}
+                {Object.keys(FILTER_LABELS).map(opt => (
+                    <option key={opt} value={opt}>
+                      {FILTER_LABELS[opt]}
+                    </option>
+                   ))}
                </select>
 
                <div className={TABS_WRAPPER}>
